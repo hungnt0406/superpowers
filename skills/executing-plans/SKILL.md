@@ -37,6 +37,37 @@ After all tasks complete and verified:
 - **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
 - Follow that skill to verify tests, present options, execute choice
 
+## Decision Records
+
+When you make a non-trivial call during execution, record it as a dated markdown
+file under `docs/superpowers/`, slugged like plans/specs:
+`docs/superpowers/<folder>/YYYY-MM-DD-<slug>.md`. One file per decision.
+
+- **`decisions/`** — calls you made on your own (filled a small spec gap, picked
+  a name/structure, chose between equivalent approaches).
+- **`need-review/`** — a plan or scope change the human approved mid-execution
+  (log it so they can re-review later), or a call you're unsure about. A verbal
+  "go ahead" on a real change is a `need-review/` record, not something to leave
+  only in the chat log.
+
+**Every decision file uses this format:**
+
+- **Decision** — State exactly what you decided.
+- **Context** — Briefly explain the situation or problem.
+- **Options considered** — Mention the main alternatives.
+- **Reasoning** — Explain why you chose this option.
+- **Impact** — What the decision means: benefits, risks, cost, timing, etc.
+- **Next steps** — What happens next and who needs to do what.
+
+**`need-review/` files add, after Next steps:**
+
+- **Why this needs review** — why you're flagging it: uncertainty, scope/cost,
+  hard to reverse, security/data risk, or "approved verbally, logged for re-review."
+- **Trade-off** — the core tension being balanced (e.g. speed vs. flexibility,
+  cost vs. correctness).
+- **Alternatives — pros & cons** — for each main alternative, list its pros and
+  cons side by side, so the human can weigh them without reconstructing the space.
+
 ## When to Stop and Ask for Help
 
 **STOP executing immediately when:**

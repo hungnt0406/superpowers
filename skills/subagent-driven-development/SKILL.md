@@ -185,9 +185,7 @@ implementation.
 
 Use the least powerful model that can handle each role to conserve cost and increase speed.
 
-**Mechanical implementation tasks** (isolated functions, clear specs, 1-2 files): use a fast, cheap model. Most implementation tasks are mechanical when the plan is well-specified.
-
-**Integration and judgment tasks** (multi-file coordination, pattern matching, debugging): use a standard model.
+**Implementation and debugging tasks** (writing code from a spec, multi-file changes, bug isolation and fixes): dispatch `subagent_type: "implementer"`. Its model is set in `~/.claude/agents/implementer.md` and toggled with `~/.claude/agents/impl-model.sh` (defaults to DeepSeek via the OpenRouter proxy — cheap and fast for mechanical and multi-step code work). If it reports BLOCKED for lack of reasoning, toggle it to a capable model and re-dispatch.
 
 **Architecture and design tasks**: use the most capable available model.
 The final whole-branch review is one of these — dispatch it on the most
@@ -214,9 +212,43 @@ implementation is transcription plus testing: use the cheapest tier for
 that implementer. Single-file mechanical fixes also take the cheapest tier.
 
 **Task complexity signals (implementation tasks):**
-- Touches 1-2 files with a complete spec → cheap model
-- Touches multiple files with integration concerns → standard model
+- Touches 1-2 files with a complete spec → `implementer`
+- Touches multiple files with integration concerns → `implementer`
 - Requires design judgment or broad codebase understanding → most capable model
+
+## Decision Records
+
+Record decisions as dated markdown files under `docs/superpowers/`, slugged like
+plans/specs: `docs/superpowers/<folder>/YYYY-MM-DD-<slug>.md`. One file per
+decision. During subagent-driven execution, the moments that produce a record:
+
+- **`decisions/`** — a call you made on your own and did not stop to ask about:
+  escalating a stuck task to a more capable model, breaking a task into smaller
+  pieces, adjudicating a reviewer finding, or resolving a conflict via a ruling.
+- **`need-review/`** — a change of plan or scope the human approved verbally so
+  they can re-review it later, or a call you're genuinely unsure about (an
+  approach change, a spec gap you filled with judgment).
+
+Don't let a verbal "yeah go ahead" mid-task vanish — that's exactly the
+`need-review/` case.
+
+**Every decision file uses this format:**
+
+- **Decision** — State exactly what you decided.
+- **Context** — Briefly explain the situation or problem.
+- **Options considered** — Mention the main alternatives.
+- **Reasoning** — Explain why you chose this option.
+- **Impact** — What the decision means: benefits, risks, cost, timing, etc.
+- **Next steps** — What happens next and who needs to do what.
+
+**`need-review/` files add, after Next steps:**
+
+- **Why this needs review** — why you're flagging it: uncertainty, scope/cost,
+  hard to reverse, security/data risk, or "approved verbally, logged for re-review."
+- **Trade-off** — the core tension being balanced (e.g. speed vs. flexibility,
+  cost vs. correctness).
+- **Alternatives — pros & cons** — for each main alternative, list its pros and
+  cons side by side, so the human can weigh them without reconstructing the space.
 
 ## The Task Loop
 
