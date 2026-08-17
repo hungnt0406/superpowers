@@ -47,6 +47,35 @@ Subagent (general-purpose):
     While iterating, run the focused test for what you're changing; run the
     full suite once before committing, not after every edit.
 
+    ## Function Documentation
+
+    For every function you create or materially change, add or update a
+    language-native documentation comment immediately above it using this
+    template. Omit only sections and tags that genuinely do not apply.
+
+    ```text
+    [WHAT]
+    Short explanation of what the function does.
+
+    [WHY]
+    Explain the business purpose when it isn't obvious.
+
+    [HOW]
+    1. First major operation.
+    2. Second major operation.
+    3. Important decision or transformation.
+    4. Produce and return the result.
+
+    [RULES / NOTES]
+    - Important business rule.
+    - Important edge case.
+    - Side effect or performance consideration.
+
+    @param ...
+    @return ...
+    @throws ...
+    ```
+
     ## Code Organization
 
     You reason best about code you can hold in context at once, and your edits are more
