@@ -188,20 +188,20 @@ Use the least powerful model that can handle each role to conserve cost and incr
 **Implementation and debugging tasks** (writing code from a spec, multi-file changes, bug isolation and fixes): dispatch `subagent_type: "implementer"`. Its model is set in `~/.claude/agents/implementer.md` and toggled with `~/.claude/agents/impl-model.sh` (defaults to DeepSeek via the OpenRouter proxy — cheap and fast for mechanical and multi-step code work). If it reports BLOCKED for lack of reasoning, toggle it to a capable model and re-dispatch.
 
 **Architecture and design tasks**: use the most capable available model.
-The final whole-branch review is one of these — dispatch it on the most
-capable available model, not the session default.
 
-**Review tasks**: choose the model with the same judgment, scaled to the
-diff's size, complexity, and risk. A small mechanical diff does not need the
-most capable model; a subtle concurrency change does. Scoped re-reviews of
-small fix diffs take a cheap-to-mid tier.
+**Review tasks**: dispatch `subagent_type: "reviewer"`. Its model and effort
+come from `~/.claude/agents/reviewer.md`; toggle the model with
+`~/.claude/agents/review-model.sh`. Do not pass a model or effort override in
+task reviews, scoped re-reviews, or the final whole-branch review — the agent
+file is the single source of truth.
 
 **Fix-loop escalation (rounds 4-5)**: use a model at least one tier above
 the implementer that got stuck.
 
-**Always specify the model explicitly when dispatching a subagent.** An
-omitted model inherits your session's model — often the most capable and
-most expensive — which silently defeats this section.
+**Make every model source explicit.** Custom `implementer` and `reviewer`
+agents take their model from their agent files. For other subagent types,
+specify the model when dispatching; otherwise they inherit the session model,
+often the most capable and most expensive.
 
 **Turn count beats token price.** Wall-clock and context cost scale with how
 many turns a subagent takes, and the cheapest models routinely take 2-3× the
@@ -481,7 +481,7 @@ The final whole-branch review gets a package too: run
 branch started from, e.g. `git merge-base main HEAD`) and include the
 printed path in the final review dispatch, so the final reviewer reads
 one file instead of re-deriving the branch diff with git commands. Dispatch
-on the most capable available model (see Model Selection), using
+`subagent_type: "reviewer"` (see Model Selection), using
 superpowers:requesting-code-review's
 [code-reviewer.md](../requesting-code-review/code-reviewer.md). Point it at
 the ledger's deferred-minor and parked lines so it can triage which must be
