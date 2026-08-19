@@ -19,6 +19,8 @@ This is not negotiable. You cannot rationalize your way out of this.
 
 **Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.
 
+**Only when the user explicitly invokes `using-superpowers` (or "superpowers") in the chat, size is never an excuse to skip the workflow.** In that case a one-line tweak, a typo fix, or any "small"/"trivial" change still requires invoking the relevant skill and running its full workflow — no exceptions. Without that explicit request, auto-detect skills as normal.
+
 **Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
 
 Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
@@ -45,6 +47,7 @@ These thoughts mean STOP—you're rationalizing:
 | "I remember this skill" | Skills evolve. Read current version. |
 | "This doesn't count as a task" | Action = task. Check for skills. |
 | "The skill is overkill" | Simple things become complex. Use it. |
+| "It's just a small change" | If the user invoked using-superpowers, size is irrelevant — run the full workflow. |
 | "I'll just do this one thing first" | Check BEFORE doing anything. |
 | "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
 | "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
