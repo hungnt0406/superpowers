@@ -31,7 +31,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **2. Dispatch code reviewer subagent:**
 
-Dispatch a `general-purpose` subagent, filling the template at [code-reviewer.md](code-reviewer.md)
+Dispatch the `reviewer` subagent, filling the template at [code-reviewer.md](code-reviewer.md). Its model and effort come from `~/.claude/agents/reviewer.md`; do not override them in the dispatch.
 
 **Placeholders:**
 - `{DESCRIPTION}` - Brief summary of what you built

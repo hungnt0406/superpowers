@@ -1,12 +1,13 @@
 # Implementer Subagent Prompt Template
 
-Use this template when dispatching an implementer subagent.
+Use this template when dispatching an implementer subagent. The custom
+`implementer` agent takes its model and effort from
+`~/.claude/agents/implementer.md`; do not add per-dispatch model or effort
+overrides unless the skill explicitly escalates a stuck task.
 
 ```
-Subagent (general-purpose):
+Subagent (implementer):
   description: "Implement Task N: [task name]"
-  model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
-         model silently inherits the session's most expensive one]
   prompt: |
     You are implementing Task N: [task name]
 
@@ -115,8 +116,9 @@ Subagent (general-purpose):
 
     **How to escalate:** Report back with status BLOCKED or NEEDS_CONTEXT. Describe
     specifically what you're stuck on, what you've tried, and what kind of help you need.
-    The controller can provide more context, re-dispatch with a more capable model,
-    or break the task into smaller pieces.
+    The controller can provide more context, change the model in
+    `~/.claude/agents/implementer.md` before re-dispatching, or break the task into
+    smaller pieces.
 
     ## Before Reporting Back: Self-Review
 
