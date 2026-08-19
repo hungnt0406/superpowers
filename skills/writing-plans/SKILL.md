@@ -31,6 +31,8 @@ Before defining tasks, map out which files will be created or modified and what 
 - Files that change together should live together. Split by responsibility, not by technical layer.
 - In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.
 
+**For greenfield projects (no existing layout to follow):** propose a top-level directory layout in the plan before defining tasks, so every task knows where its files land. Organize by feature/responsibility, keep each unit small and reviewable, and adapt the layout to the project's language and domain — never copy a template verbatim. See `file-structure-templates.md` for illustrative starting points (data-science, backend, frontend, full-stack). Treat them as examples to adapt, not required structures.
+
 This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
 
 ## Task Right-Sizing
